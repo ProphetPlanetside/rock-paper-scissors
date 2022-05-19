@@ -49,6 +49,24 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const playerSelection = 'rock';
+function roundMessage(result) {
+    
+}
+
+function game() {
+    let playerSelection;
+    let computerSelection;
+    let playerScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        playerSelection = prompt("Your move. Rock, Paper, or Scissors?").toLowerCase;
+        while (playerSelection != 'rock' && playerSelection != 'paper' && playerSelection != 'scissors') {
+            playerSelection = prompt("Invalid selection, try again. Rock, Paper, or Scissors?").toLowerCase;
+        }
+        computerSelection = computerPlay();
+    }
+}
+
+const playerSelection = 'paper';
 const computerSelection = computerPlay();
 console.log(playRound(playerSelection, computerSelection));
