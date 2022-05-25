@@ -26,23 +26,23 @@ function playRound(playerSelection, computerSelection) {
     // The player and computer tie.
     if (playerSelection == computerSelection) {
         roundMessage(1, playerSelection, computerSelection);
-        return 1;
+        //return 1;
     }
     // Win
     else if (playerSelection == 'rock' && computerSelection == 'paper') {
         roundMessage(2, playerSelection, computerSelection);
-        return 2;
+        //return 2;
     }
     // Lose
     else if (playerSelection == 'rock' && computerSelection == 'scissors') {
         roundMessage(3, playerSelection, computerSelection);
-        return 3;
+        //return 3;
     }
 
     // Win
     else if (playerSelection == 'paper' && computerSelection == 'scissors') {
         roundMessage(4, playerSelection, computerSelection);
-        return 4;
+        //return 4;
     }
     // Lose
     else if (playerSelection == 'paper' && computerSelection == 'rock') {
@@ -53,13 +53,13 @@ function playRound(playerSelection, computerSelection) {
     // Implied that playerSelection == 'scissors'
     else if (computerSelection == 'rock') {
         roundMessage(6, playerSelection, computerSelection);
-        return 6;
+        //return 6;
     }
     // Lose
     // Implied that playerSelection == 'scissors'
     else {
         roundMessage(7, playerSelection, computerSelection);
-        return 7;
+        //return 7;
     }
 }
 
@@ -136,5 +136,31 @@ function game() {
     }
 }
 
-// Call the game function to run the game.
-game();
+// Call the game function to run the game (5 rounds).
+// game();
+
+
+// New code from "Revisiting Rock Paper Scissors"
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+
+// These 3 below didn't work because I didn't wrap the playRound function call within a "function()".
+// rockBtn.onclick = playRound('rock', computerPlay());
+// paperBtn.onclick = playRound('paper', computerPlay());
+// scissorsBtn.onclick = playRound('scissors', computerPlay());
+
+// document.getElementById("rock").addEventListener("click", function() {playRound('rock', computerPlay());});
+// The above or below work. I can use the above if I don't want to first create the const rockBtn.
+// In the event listener, the playRound function call must be wrapped in a function for it to work.
+rockBtn.addEventListener("click", function() {playRound('rock', computerPlay());});
+paperBtn.addEventListener("click", function() {playRound('paper', computerPlay());});
+scissorsBtn.addEventListener("click", function() {playRound('scissors', computerPlay());});
+
+// The buttons work with playRound just fine if I use the below for the buttons in the HTML file.
+// (Instead of writing in the .js file -> inline js in HTML).
+{/* <button id = "rock" onclick = "playRound('rock', computerPlay())">Rock</button>
+<button id = "paper" onclick = "playRound('paper', computerPlay())">Paper</button>
+<button id = "scissors" onclick = "playRound('scissors', computerPlay())">Scissors</button> */}
+
+// I am on step 2.c
