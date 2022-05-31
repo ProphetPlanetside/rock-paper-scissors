@@ -1,6 +1,25 @@
 let playerScore = 0;
 let computerScore = 0;
 
+const divRoundResults = document.querySelector('#roundResults');
+const divCurrentScore = document.querySelector('#currentScore');
+const divGameOverMessage = document.querySelector('#gameOverMessage');
+
+// Displays a Game Over message once the player or computer gets 5 points, then resets the scores in case
+// the user wants to play again.
+function checkForWinner() {
+    if (playerScore == 5) {
+        divGameOverMessage.textContent = "Game Over, YOU WIN!  Click a button to play another game.";
+        playerScore = 0;
+        computerScore = 0;
+    }
+    else if (computerScore == 5) {
+        divGameOverMessage.textContent = "Game Over, You Lose.  Click a button to play another game.";
+        playerScore = 0;
+        computerScore = 0;
+    }
+}
+
 // Generate a random number from 1 to 3.
 // If '1' return 'rock'.
 // If '2' return 'paper'.
@@ -24,6 +43,8 @@ function computerPlay() {
 // Compare playerSelection to computerSelection and see who wins.
 // Return a message saying 'you lose', 'you tie', or 'you win.'
 function playRound(playerSelection, computerSelection) {
+    // Ensures the game over message does not display if you're in the middle of playing a game.
+    divGameOverMessage.textContent = "";
     // Convert playerSelection string to be all lowercase.
     playerSelection = playerSelection.toLowerCase();
     // The player and computer tie.
@@ -31,71 +52,75 @@ function playRound(playerSelection, computerSelection) {
         roundMessage(1, playerSelection, computerSelection);
         //return 1;
     }
-    // Win
+    // Lose
     else if (playerSelection == 'rock' && computerSelection == 'paper') {
         roundMessage(2, playerSelection, computerSelection);
+        computerScore++;
         //return 2;
     }
-    // Lose
+    // Win
     else if (playerSelection == 'rock' && computerSelection == 'scissors') {
         roundMessage(3, playerSelection, computerSelection);
+        playerScore++;
         //return 3;
     }
 
-    // Win
+    // Lose
     else if (playerSelection == 'paper' && computerSelection == 'scissors') {
         roundMessage(4, playerSelection, computerSelection);
+        computerScore++;
         //return 4;
     }
-    // Lose
+    // Win
     else if (playerSelection == 'paper' && computerSelection == 'rock') {
         roundMessage(5, playerSelection, computerSelection);
-        return 5;
+        playerScore++;
+        //return 5;
     }
-    // Win
+    // Lose
     // Implied that playerSelection == 'scissors'
     else if (computerSelection == 'rock') {
         roundMessage(6, playerSelection, computerSelection);
+        computerScore++;
         //return 6;
     }
-    // Lose
-    // Implied that playerSelection == 'scissors'
+    // Win
+    // Implied that playerSelection == 'scissors' and computerSelection == 'paper'
     else {
         roundMessage(7, playerSelection, computerSelection);
+        playerScore++;
         //return 7;
     }
+    divCurrentScore.textContent = "The current score is: Player -> " + playerScore + ", Computer -> " + computerScore;
+    checkForWinner();
 }
 
 // Takes a number, 'result', from 1 to 7.
 // Return win/lose/tie message corresponding to that number.
 function roundMessage(result, playerSelection, computerSelection) {
     if (result == 1) {
-        console.log('This round is a Tie! ' + playerSelection + ' ties with ' + computerSelection);
+        divRoundResults.textContent = 'This round is a Tie! ' + playerSelection + ' ties with ' + computerSelection;
     }
     else if (result == 2) {
-        console.log('You Lose this round! ' + computerSelection + ' beats ' + playerSelection);
+        divRoundResults.textContent = 'You Lose this round! ' + computerSelection + ' beats ' + playerSelection;
     }
     else if (result == 3) {
-        console.log('You Win this round! ' + playerSelection + ' beats ' + computerSelection);
+        divRoundResults.textContent = 'You Win this round! ' + playerSelection + ' beats ' + computerSelection;
     }
     else if (result == 4) {
-        console.log('You Lose this round! ' + computerSelection + ' beats ' + playerSelection);
+        divRoundResults.textContent = 'You Lose this round! ' + computerSelection + ' beats ' + playerSelection;
     }
     else if (result == 5) {
-        console.log('You Win this round! ' + playerSelection + ' beats ' + computerSelection);
+        divRoundResults.textContent = 'You Win this round! ' + playerSelection + ' beats ' + computerSelection;
     }
     else if (result == 6) {
-        console.log('You Lose this round! ' + computerSelection + ' beats ' + playerSelection);
+        divRoundResults.textContent = 'You Lose this round! ' + computerSelection + ' beats ' + playerSelection;
     }
     // result == 7
     else {
-        console.log('You Win this round! ' + playerSelection + ' beats ' + computerSelection);
+        divRoundResults.textContent = 'You Win this round! ' + playerSelection + ' beats ' + computerSelection;
     }
 }
-
-// Call the game function to run the game (5 rounds).
-// game();
-
 
 // New code from "Revisiting Rock Paper Scissors"
 const rockBtn = document.querySelector('#rock');
@@ -131,6 +156,8 @@ scissorsBtn.addEventListener("click", function() {playRound('scissors', computer
 
 
 
+// Call the game function to run the game (5 rounds).
+// game();
 
 // Calls the playRound function to play a 5 round game.
 // Reports a winner or loser at the end by keeping score.
