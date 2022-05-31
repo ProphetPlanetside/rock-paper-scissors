@@ -1,3 +1,6 @@
+let playerScore = 0;
+let computerScore = 0;
+
 // Generate a random number from 1 to 3.
 // If '1' return 'rock'.
 // If '2' return 'paper'.
@@ -90,6 +93,45 @@ function roundMessage(result, playerSelection, computerSelection) {
     }
 }
 
+// Call the game function to run the game (5 rounds).
+// game();
+
+
+// New code from "Revisiting Rock Paper Scissors"
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+
+// These 3 below didn't work because I didn't wrap the playRound function call within a "function()".
+// rockBtn.onclick = playRound('rock', computerPlay());
+// paperBtn.onclick = playRound('paper', computerPlay());
+// scissorsBtn.onclick = playRound('scissors', computerPlay());
+
+// document.getElementById("rock").addEventListener("click", function() {playRound('rock', computerPlay());});
+// The above or below work. I can use the above if I don't want to first create the const rockBtn.
+// In the event listener, the playRound function call must be wrapped in a function for it to work.
+rockBtn.addEventListener("click", function() {playRound('rock', computerPlay());});
+paperBtn.addEventListener("click", function() {playRound('paper', computerPlay());});
+scissorsBtn.addEventListener("click", function() {playRound('scissors', computerPlay());});
+
+// The buttons work with playRound just fine if I use the below for the buttons in the HTML file.
+// (Instead of writing in the .js file -> inline js in HTML).
+{/* <button id = "rock" onclick = "playRound('rock', computerPlay())">Rock</button>
+<button id = "paper" onclick = "playRound('paper', computerPlay())">Paper</button>
+<button id = "scissors" onclick = "playRound('scissors', computerPlay())">Scissors</button> */}
+
+// I am on step 2.c
+
+
+
+
+
+
+
+
+
+
+
 // Calls the playRound function to play a 5 round game.
 // Reports a winner or loser at the end by keeping score.
 // Prompts user for selections.
@@ -135,32 +177,3 @@ function game() {
         console.log('The Game ends in a Tie! You scored ' + playerScore + ' and the Computer scored ' + computerScore);
     }
 }
-
-// Call the game function to run the game (5 rounds).
-// game();
-
-
-// New code from "Revisiting Rock Paper Scissors"
-const rockBtn = document.querySelector('#rock');
-const paperBtn = document.querySelector('#paper');
-const scissorsBtn = document.querySelector('#scissors');
-
-// These 3 below didn't work because I didn't wrap the playRound function call within a "function()".
-// rockBtn.onclick = playRound('rock', computerPlay());
-// paperBtn.onclick = playRound('paper', computerPlay());
-// scissorsBtn.onclick = playRound('scissors', computerPlay());
-
-// document.getElementById("rock").addEventListener("click", function() {playRound('rock', computerPlay());});
-// The above or below work. I can use the above if I don't want to first create the const rockBtn.
-// In the event listener, the playRound function call must be wrapped in a function for it to work.
-rockBtn.addEventListener("click", function() {playRound('rock', computerPlay());});
-paperBtn.addEventListener("click", function() {playRound('paper', computerPlay());});
-scissorsBtn.addEventListener("click", function() {playRound('scissors', computerPlay());});
-
-// The buttons work with playRound just fine if I use the below for the buttons in the HTML file.
-// (Instead of writing in the .js file -> inline js in HTML).
-{/* <button id = "rock" onclick = "playRound('rock', computerPlay())">Rock</button>
-<button id = "paper" onclick = "playRound('paper', computerPlay())">Paper</button>
-<button id = "scissors" onclick = "playRound('scissors', computerPlay())">Scissors</button> */}
-
-// I am on step 2.c
